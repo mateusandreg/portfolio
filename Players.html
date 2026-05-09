@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scout Portal — Player Portfolio · Mateus Geroldini</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#050d1c;--deep:#091526;--card:#0e1f3a;
+  --border:#17325a;--gold:#d4a017;--gold2:#f0c040;--gold3:#ffe08a;
+  --blue:#1e6fcf;--white:#e6edf8;--muted:#7090b5;
+  --green:#27c06a;--red:#e84060;--orange:#f77f00;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--navy);color:var(--white);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(30,111,207,.055) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(30,111,207,.055) 1px,transparent 1px);
+  background-size:44px 44px;}
+.z1{position:relative;z-index:1;}
+
+/* HEADER */
+header{background:linear-gradient(135deg,#040c1a,#08152a 60%,#0d1e35);border-bottom:2px solid var(--gold);
+  box-shadow:0 4px 48px rgba(212,160,23,.2);position:sticky;top:0;z-index:200;}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:15px 40px;gap:12px;flex-wrap:wrap;}
+.logo{display:flex;align-items:center;gap:14px;}
+.diamond{width:46px;height:46px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);display:flex;align-items:center;
+  justify-content:center;font-family:'Orbitron',monospace;font-weight:900;font-size:16px;color:var(--navy);}
+.logo-text h1{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:var(--gold2);letter-spacing:3px;}
+.logo-text p{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.hdr-pill{background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.35);
+  padding:5px 14px;border-radius:20px;font-size:11px;color:var(--gold3);letter-spacing:1.5px;}
+.scout-credit{background:rgba(30,111,207,.12);border:1px solid rgba(30,111,207,.35);
+  padding:5px 16px;border-radius:20px;font-size:11px;color:#7ab8ff;letter-spacing:1px;}
+.scout-credit strong{color:var(--gold2);}
+
+/* HERO */
+.hero{text-align:center;padding:56px 40px 44px;
+  background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(30,111,207,.12),transparent);
+  position:relative;}
+.hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:220px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.hero-eye{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.hero-title{font-family:'Orbitron',monospace;font-size:clamp(22px,4vw,50px);font-weight:900;
+  color:var(--white);line-height:1.1;margin-bottom:14px;}
+.hero-title span{color:var(--gold2);}
+.hero-sub{font-size:15px;color:var(--muted);max-width:640px;margin:0 auto 28px;line-height:1.5;}
+.kpis{display:flex;justify-content:center;gap:44px;flex-wrap:wrap;}
+.kpi .v{font-family:'Orbitron',monospace;font-size:30px;font-weight:700;color:var(--gold2);}
+.kpi .l{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+
+/* SECTION */
+.sec-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--gold);
+  letter-spacing:3px;text-transform:uppercase;padding:0 40px;margin:44px 0 20px;
+  display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:22px;padding:0 40px 60px;}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;
+  position:relative;transition:transform .3s,box-shadow .3s,border-color .3s;}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 56px rgba(212,160,23,.22);border-color:var(--gold);}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),transparent);}
+.card.is-gem::before{background:linear-gradient(90deg,#ba68c8,var(--gold2),#ba68c8);}
+.card.is-gem{border-color:rgba(186,104,200,.4);}
+.card.is-gem:hover{border-color:#ba68c8;box-shadow:0 16px 56px rgba(186,104,200,.3);}
+.gem-tag{position:absolute;top:3px;right:0;
+  background:linear-gradient(90deg,rgba(186,104,200,.2),rgba(212,160,23,.2));
+  border-left:2px solid var(--gold2);padding:4px 14px;
+  font-size:9px;letter-spacing:1.5px;color:var(--gold3);font-weight:700;font-family:'Orbitron',monospace;}
+
+/* CARD HEADER */
+.c-hdr{display:flex;align-items:center;gap:14px;padding:18px 18px 14px;
+  background:linear-gradient(135deg,rgba(30,111,207,.1),transparent);border-bottom:1px solid var(--border);}
+.num{font-family:'Orbitron',monospace;font-size:30px;font-weight:900;
+  color:rgba(212,160,23,.14);min-width:42px;line-height:1;}
+.info{flex:1;}
+.pname{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--white);letter-spacing:.8px;}
+.pname span{color:var(--gold2);}
+.meta{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;}
+.badge{padding:3px 9px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;}
+.b-pos{background:rgba(30,111,207,.22);color:#80c0ff;border:1px solid rgba(30,111,207,.38);}
+.b-club{background:rgba(212,160,23,.12);color:var(--gold3);border:1px solid rgba(212,160,23,.28);}
+.b-free{background:rgba(232,64,96,.14);color:#ff8099;border:1px solid rgba(232,64,96,.3);}
+.b-ok{background:rgba(39,192,106,.12);color:#7deaaa;border:1px solid rgba(39,192,106,.28);}
+.b-warn{background:rgba(247,127,0,.12);color:#ffc06a;border:1px solid rgba(247,127,0,.28);}
+.b-gem{background:rgba(186,104,200,.18);color:#e0b0ff;border:1px solid rgba(186,104,200,.35);}
+.b-league{background:rgba(30,111,207,.08);color:#80c0ff;border:1px solid rgba(30,111,207,.18);font-size:9px;}
+.rating{width:50px;height:50px;border-radius:50%;border:2px solid var(--gold);
+  background:rgba(212,160,23,.1);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;flex-shrink:0;}
+.rating .rv{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--gold2);}
+.rating .rl{font-size:7px;color:var(--muted);letter-spacing:1px;}
+
+/* RADAR */
+.radar-wrap{padding:14px 14px 6px;display:flex;flex-direction:column;align-items:center;}
+canvas.radar{display:block;}
+.radar-season{font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:4px;text-align:center;}
+
+/* DATA NOTE */
+.data-note{margin:0 18px 10px;padding:6px 12px;border-radius:8px;
+  background:rgba(39,192,106,.07);border:1px solid rgba(39,192,106,.2);
+  font-size:10px;color:#7deaaa;letter-spacing:.4px;}
+.data-note.gem{background:rgba(186,104,200,.07);border-color:rgba(186,104,200,.25);color:#e0b0ff;}
+.data-note.warn{background:rgba(247,127,0,.07);border-color:rgba(247,127,0,.2);color:#ffc06a;}
+
+/* BARS */
+.bars{padding:6px 18px 14px;}
+.bar-row{display:flex;align-items:center;gap:9px;margin-bottom:8px;}
+.bl{font-size:10px;color:var(--muted);min-width:75px;letter-spacing:.4px;text-transform:uppercase;}
+.bt{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.bf{height:100%;border-radius:3px;}
+.bv{font-family:'Orbitron',monospace;font-size:10px;color:var(--gold3);min-width:52px;text-align:right;}
+
+/* TRAITS */
+.traits{padding:0 18px 14px;display:flex;flex-wrap:wrap;gap:5px;}
+.trait{padding:3px 9px;border-radius:16px;font-size:10px;letter-spacing:.3px;text-transform:uppercase;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--muted);}
+.trait.g{background:rgba(212,160,23,.1);border-color:rgba(212,160,23,.25);color:var(--gold3);}
+
+/* CONTRACT */
+.contract{padding:8px 18px 12px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);flex-wrap:wrap;}
+
+/* LINKS */
+.links{padding:8px 18px 16px;display:flex;gap:7px;flex-wrap:wrap;}
+.lbtn{padding:5px 13px;border-radius:7px;font-size:10px;font-weight:700;
+  text-decoration:none;letter-spacing:.4px;border:1px solid;transition:background .2s;}
+.l-sf{background:rgba(230,130,0,.1);color:#ffb347;border-color:rgba(230,130,0,.28);}
+.l-sf:hover{background:rgba(230,130,0,.22);}
+.l-tm{background:rgba(30,111,207,.1);color:#7ab8ff;border-color:rgba(30,111,207,.28);}
+.l-tm:hover{background:rgba(30,111,207,.22);}
+
+/* UPDATED BADGE */
+.updated{display:inline-block;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;
+  background:rgba(212,160,23,.15);color:var(--gold3);border:1px solid rgba(212,160,23,.3);
+  letter-spacing:.5px;margin-left:4px;vertical-align:middle;}
+
+/* FOOTER */
+footer{background:var(--deep);border-top:1px solid var(--border);
+  text-align:center;padding:28px 40px;font-size:12px;color:var(--muted);letter-spacing:1px;}
+footer span{color:var(--gold3);}
+.f-scout{margin-top:8px;font-size:14px;}
+.f-scout strong{color:var(--gold2);font-family:'Orbitron',monospace;letter-spacing:2px;}
+.f-date{margin-top:4px;font-size:10px;color:var(--muted);opacity:.7;}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;padding:0 14px 40px;}
+  .hero,.sec-title{padding-left:16px;padding-right:16px;}
+  .hdr{padding:12px 16px;}
+  .kpis{gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <div class="logo">
+      <div class="diamond">SP</div>
+      <div class="logo-text">
+        <h1>SCOUT PORTAL</h1>
+        <p>Player Analysis &amp; Performance Intelligence</p>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div class="hdr-pill">⚽ Season 2025–2026</div>
+      <div class="scout-credit">🔍 Scout: <strong>Mateus Geroldini</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="hero z1">
+  <div class="hero-eye">◆ Scouting Intelligence Report · Updated 07/05/2026</div>
+  <h2 class="hero-title">Player <span>Performance</span><br>Analytics Portfolio</h2>
+  <p class="hero-sub">
+    Radar analysis for 11 scouted players. Data sourced from Sofascore · Soccerway · FotMob —
+    season 2025/26. Scouted &amp; curated by <strong style="color:var(--gold3)">Mateus Geroldini</strong>.
+  </p>
+  <div class="kpis">
+    <div class="kpi"><div class="v">11</div><div class="l">Players</div></div>
+    <div class="kpi"><div class="v">8</div><div class="l">Positions</div></div>
+    <div class="kpi"><div class="v">6</div><div class="l">Metrics</div></div>
+    <div class="kpi"><div class="v">25/26</div><div class="l">Season</div></div>
+  </div>
+</div>
+
+<div class="sec-title z1">◆ Player Cards &amp; Radar Analysis — Season 2025/26</div>
+<div class="grid z1" id="grid"></div>
+
+<footer class="z1">
+  <span>Scout Portal</span> · Data: Sofascore · Soccerway · FotMob · Transfermarkt
+  <div class="f-scout">📋 Scout Report by <strong>Mateus Geroldini</strong></div>
+  <div class="f-date">Last updated: 07 May 2026</div>
+</footer>
+
+<script>
+const BC={Goals:'#e84060',Assists:'#1e6fcf',KeyPasses:'#9b5de5',Dribblings:'#27c06a',Tackles:'#f77f00',Passing:'#d4a017'};
+
+const PLAYERS=[
+  {
+    id:1,first:"Samuele",last:"Di Benedetto",
+    pos:"Defensive Midfield",posShort:"CDM",
+    club:"VfB Stuttgart II",league:"3. Liga (GER)",
+    contract:"30/06/2026",
+    cNote:"Will not renew — Free from 01/07/2026",cType:"b-free",
+    rating:7.0,color:"#1e6fcf",isGem:false,
+    traits:["First Touch","Passing","Vision","Vertical Pass","Ball Recovery"],
+    season:"25/26 · 3. Liga · 28 apps · 0G / 0A",
+    dnote:"0 goals · 0 assists · Avg. rating: 7.02 · 1,796 min played",dnClass:"",
+    sofaUrl:"https://www.sofascore.com/football/player/di-benedetto-samuele/1152502",
+    tmUrl:"https://www.transfermarkt.com.br/samuele-di-benedetto/profil/spieler/826064",
+    stats:{Goals:{r:1,l:"0"},Assists:{r:1,l:"0"},KeyPasses:{r:5,l:"1.1 / 90'"},Dribblings:{r:3,l:"0.7 / 90'"},Tackles:{r:9,l:"4.1 / 90'"},Passing:{r:8,l:"81% acc."}}
+  },
+  {
+    id:2,first:"Florent",last:"Sanchez",
+    pos:"Central Midfield",posShort:"CM",
+    club:"US Orléans",league:"National (FRA)",
+    contract:"30/06/2026",
+    cNote:"Contract until 30/06/2026 · Renewal uncertain",cType:"b-warn",
+    rating:7.4,color:"#9b5de5",isGem:false,
+    traits:["First Touch","Passing","Vision","Key Pass","Assist Maker"],
+    season:"25/26 · National · 26 apps · 3G / 9A",
+    dnote:"3 goals · 9 assists · 2,070 min · Top creator in squad",dnClass:"",
+    sofaUrl:"https://www.sofascore.com/football/player/sanchez-da-silva-florent/1385467",
+    tmUrl:"https://www.transfermarkt.com/florent-sanchez/profil/spieler/607225",
+    stats:{Goals:{r:3,l:"3"},Assists:{r:9,l:"9"},KeyPasses:{r:9,l:"2.5 / 90'"},Dribblings:{r:4,l:"1.0 / 90'"},Tackles:{r:5,l:"2.1 / 90'"},Passing:{r:8,l:"84% acc."}}
+  },
+  {
+    id:3,first:"Lucas",last:"Ribeiro",
+    pos:"Right Winger",posShort:"RW",
+    club:"CyD Leonesa",league:"LaLiga 2 (ESP)",
+    contract:"30/06/2026",
+    cNote:"Contract until 30/06/2026 · Joined Sep/2025",cType:"b-warn",
+    rating:7.4,color:"#27c06a",isGem:false,
+    traits:["First Touch","Dribbling","Playmaker","Finishing","Speed"],
+    season:"25/26 · LaLiga 2 · 8 apps · 3G / 1A",
+    dnote:"3 goals · 1 assist · ~500 min · Joined September 2025",dnClass:"",
+    sofaUrl:"https://www.sofascore.com/football/player/lucas-ribeiro/954688",
+    tmUrl:"https://www.transfermarkt.com/lucas-ribeiro/profil/spieler/612880",
+    stats:{Goals:{r:6,l:"3"},Assists:{r:3,l:"1"},KeyPasses:{r:6,l:"1.8 / 90'"},Dribblings:{r:8,l:"3.4 / 90'"},Tackles:{r:2,l:"0.7 / 90'"},Passing:{r:6,l:"72% acc."}}
+  },
+  {
+    id:4,first:"Antonio",last:"Gala",
+    pos:"Central Midfield",posShort:"CM",
+    club:"Campobasso FC",league:"Serie C Gr.B (ITA)",
+    contract:"30/06/2027",
+    cNote:"Contract until 30/06/2027 · AC Milan academy graduate",cType:"b-ok",
+    rating:7.2,color:"#f77f00",isGem:false,
+    traits:["First Touch","Dribbling","Key Pass","Insertion","Playmaker"],
+    season:"25/26 · Serie C Gr.B · 36 apps · 5G / 9A",
+    dnote:"5 goals · 9 assists · G+A: 14 · 2,762 min · Top 81% xG",dnClass:"",
+    sofaUrl:"https://www.sofascore.com/football/player/gala-antonio/1137252",
+    tmUrl:"https://www.transfermarkt.com/antonio-gala/profil/spieler/815556",
+    stats:{Goals:{r:5,l:"5"},Assists:{r:9,l:"9"},KeyPasses:{r:8,l:"2.3 / 90'"},Dribblings:{r:6,l:"2.1 / 90'"},Tackles:{r:5,l:"2.0 / 90'"},Passing:{r:8,l:"82% acc."}}
+  },
+  {
+    id:5,first:"Simone",last:"D'Uffizi",
+    pos:"Left Winger / Midfielder",posShort:"LW/MF",
+    club:"Ascoli Calcio",league:"Serie C Gr.B (ITA)",
+    contract:"30/06/2028",
+    cNote:"Long-term contract until 30/06/2028",cType:"b-ok",
+    rating:7.6,color:"#e84060",isGem:false,
+    traits:["Dribbling","Playmaker","Finishing","Creativity","Key Pass"],
+    season:"25/26 · Serie C Gr.B · 36 apps · 13G / 9A",
+    dnote:"13 goals · 9 assists · G+A: 22 · Top Scorer Ascoli · 2,926 min",dnClass:"",
+    sofaUrl:"https://www.sofascore.com/football/player/simone-duffizi/1136954",
+    tmUrl:"https://www.transfermarkt.com/simone-duffizi/profil/spieler/884065",
+    stats:{Goals:{r:10,l:"13"},Assists:{r:9,l:"9"},KeyPasses:{r:8,l:"2.1 / 90'"},Dribblings:{r:9,l:"3.9 / 90'"},Tackles:{r:2,l:"0.5 / 90'"},Passing:{r:7,l:"74% acc."}}
+  },
+  {
+    id:6,first:"Talles",last:"Costa",
+    pos:"Central Midfield",posShort:"CM",
+    club:"No Club",league:"— Available Now",
+    contract:"—",
+    cNote:"No club — Available immediately · 11 apps · 1 assist (last club, 25/26)",cType:"b-free",
+    rating:6.8,color:"#00bcd4",isGem:false,
+    traits:["Tackles","Dynamic","Box to Box","Pressing","Relationship"],
+    season:"Last club 25/26 · 11 apps · 0G / 1A before termination",
+    dnote:"11 apps · 0 goals · 1 assist at last club before contract termination",dnClass:"warn",
+    sofaUrl:"https://www.sofascore.com/football/player/talles-costa/1002360",
+    tmUrl:"https://www.transfermarkt.com/talles-costa/profil/spieler/627222",
+    stats:{Goals:{r:2,l:"0"},Assists:{r:3,l:"1"},KeyPasses:{r:4,l:"0.9 / 90'"},Dribblings:{r:4,l:"1.2 / 90'"},Tackles:{r:8,l:"3.8 / 90'"},Passing:{r:7,l:"77% acc."}}
+  },
+  {
+    id:7,first:"Anthony",last:"Valencia",
+    pos:"Right Winger / CAM",posShort:"RW",
+    club:"Royal Antwerp FC",league:"Pro League (BEL)",
+    contract:"30/06/2026",
+    cNote:"Contract until 30/06/2026 · Expiring soon · Ecuador NT",cType:"b-warn",
+    rating:7.0,color:"#ff5722",isGem:false,
+    traits:["Dribbling","Speed","1v1","Finishing","Direct Play"],
+    season:"25/26 · Pro League · 4G / 2A (updated)",
+    dnote:"4 goals · 2 assists · Pro League + UCL 25/26 · Rating: 6.9",dnClass:"",
+    sofaUrl:"https://www.sofascore.com/football/player/anthony-valencia/1020197",
+    tmUrl:"https://www.transfermarkt.com/anthony-valencia/profil/spieler/974374",
+    stats:{Goals:{r:6,l:"4"},Assists:{r:3,l:"2"},KeyPasses:{r:5,l:"1.5 / 90'"},Dribblings:{r:9,l:"4.0 / 90'"},Tackles:{r:2,l:"0.7 / 90'"},Passing:{r:5,l:"68% acc."}}
+  },
+  {
+    id:8,first:"",last:"Maceió",
+    pos:"Right Winger",posShort:"RW",
+    club:"Portuguesa",league:"Paulistão A1 2026",
+    contract:"31/12/2027",
+    cNote:"Contract until 31/12/2027 · Portuguesa-RJ · Brazil 4th Division",cType:"b-ok",
+    rating:7.1,color:"#ffeb3b",isGem:false,
+    traits:["Dribbling","Power","Direct Winger","Finishing","Speed"],
+    season:"Paulistão A1 2026 · 9 apps · 3G",
+    dnote:"3 goals · 9 apps · Paulistão Série A1 2026 only (main reference)",dnClass:"",
+    sofaUrl:"https://www.sofascore.com/football/player/maceio/1645837",
+    tmUrl:"https://www.transfermarkt.com/maceio/profil/spieler/1097174",
+    stats:{Goals:{r:6,l:"3"},Assists:{r:3,l:"est."},KeyPasses:{r:5,l:"1.3 / 90'"},Dribblings:{r:8,l:"3.5 / 90'"},Tackles:{r:2,l:"0.5 / 90'"},Passing:{r:5,l:"~68% acc."}}
+  },
+  {
+    id:9,first:"Jesús",last:"Maraude",
+    pos:"Attacking Midfield",posShort:"CAM",
+    club:"Club Always Ready",league:"Copa Libertadores 2026",
+    contract:"Contract info unavailable",
+    cNote:"No contract info available · 18 y/o · Bolivian champion 2025",cType:"b-warn",
+    rating:6.7,color:"#ba68c8",isGem:false,
+    traits:["Dribbling","Technical","Vertical Pass","Ball Carrier","Creativity"],
+    season:"Libertadores 2026 · 3 apps · 0G / 1A",
+    dnote:"Copa Libertadores 2026 only · 3 apps · 1 assist · Multiple dribbles completed",dnClass:"",
+    sofaUrl:"https://www.sofascore.com/football/player/jesus-maraude/2023729",
+    tmUrl:"https://www.transfermarkt.com/jesus-maraude/profil/spieler/1339333",
+    stats:{Goals:{r:1,l:"0"},Assists:{r:3,l:"1"},KeyPasses:{r:7,l:"2.0 / 90'"},Dribblings:{r:8,l:"high"},Tackles:{r:2,l:"0.5 / 90'"},Passing:{r:7,l:"77% acc."}}
+  },
+  {
+    id:10,first:"Emmanuel",last:"Addai",
+    pos:"Left Winger",posShort:"LW",
+    club:"Qarabağ FK",league:"UCL + Premier (AZE)",
+    contract:"30/06/2026",
+    cNote:"Contract until 30/06/2026 · UCL 25/26 participant · vs Ajax / Copenhagen",cType:"b-warn",
+    rating:7.3,color:"#4caf50",isGem:false,
+    traits:["Dribbling","Speed","Power","Playmaker","Direct"],
+    season:"25/26 · UCL + League · 5G / 1A total",
+    dnote:"5 goals · 1 assist · UCL 25/26: 10 apps, 1G · Rising form",dnClass:"",
+    sofaUrl:"https://www.sofascore.com/football/player/addai-emmanuel/1398529",
+    tmUrl:"https://www.transfermarkt.com/emmanuel-addai/profil/spieler/944367",
+    stats:{Goals:{r:7,l:"5"},Assists:{r:2,l:"1"},KeyPasses:{r:5,l:"1.5 / 90'"},Dribblings:{r:8,l:"3.6 / 90'"},Tackles:{r:2,l:"0.6 / 90'"},Passing:{r:6,l:"71% acc."}}
+  },
+  {
+    id:11,first:"Andria",last:"Bartishvili",
+    pos:"Attacking Mid / Winger",posShort:"CAM/W",
+    club:"FC Iberia 1999",league:"Erovnuli Liga (GEO)",
+    contract:"31/12/2026 (loan)",
+    cNote:"Loan until 31/12/2026 · Parent club: FC Kolkheti-1913 Poti · Born 30/03/2009",cType:"b-gem",
+    rating:7.4,color:"#ba68c8",isGem:true,
+    gemLabel:"🌟 TOP PROSPECT · 16 YRS · AMBIDEXTROUS",
+    traits:["Dribbling","Playmaker","Ambidextrous","Close Ball Control","Finishing","Speed"],
+    season:"2026 · Erovnuli Liga · Loan · 16 years old",
+    dnote:"Best U17 Georgia 2025 · Golden medal award · 170cm · Strong technical profile",dnClass:"gem",
+    sofaUrl:"https://www.sofascore.com/football/player/andria-bartishvili/1960775",
+    tmUrl:"https://www.transfermarkt.com/andria-bartishvili/profil/spieler/1329836",
+    stats:{Goals:{r:4,l:"evolving"},Assists:{r:5,l:"3 ast."},KeyPasses:{r:8,l:"2.2 / 90'"},Dribblings:{r:9,l:"outstanding"},Tackles:{r:3,l:"0.6 / 90'"},Passing:{r:7,l:"~78% acc."}}
+  },
+];
+
+function rgb(h){return`${parseInt(h.slice(1,3),16)},${parseInt(h.slice(3,5),16)},${parseInt(h.slice(5,7),16)}`;}
+
+function radar(canvas,stats,col){
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=Math.min(W,H)/2-30;
+  const K=Object.keys(stats),n=K.length,G='#d4a017';
+  ctx.clearRect(0,0,W,H);
+  for(let i=1;i<=5;i++){
+    const r=(R/5)*i;ctx.beginPath();
+    for(let j=0;j<=n;j++){const a=(Math.PI*2/n)*j-Math.PI/2;j===0?ctx.moveTo(cx+r*Math.cos(a),cy+r*Math.sin(a)):ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));}
+    ctx.closePath();ctx.strokeStyle=i===5?'rgba(255,255,255,.15)':'rgba(255,255,255,.06)';ctx.lineWidth=i===5?1.2:.7;ctx.stroke();
+  }
+  for(let i=0;i<n;i++){
+    const a=(Math.PI*2/n)*i-Math.PI/2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+R*Math.cos(a),cy+R*Math.sin(a));
+    ctx.strokeStyle='rgba(255,255,255,.1)';ctx.lineWidth=1;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx+R*Math.cos(a),cy+R*Math.sin(a),3,0,Math.PI*2);ctx.fillStyle=G;ctx.fill();
+  }
+  ctx.beginPath();
+  for(let i=0;i<n;i++){const a=(Math.PI*2/n)*i-Math.PI/2,v=Math.min(stats[K[i]].r,10)/10,r=R*v;i===0?ctx.moveTo(cx+r*Math.cos(a),cy+r*Math.sin(a)):ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));}
+  ctx.closePath();
+  const g=ctx.createRadialGradient(cx,cy,0,cx,cy,R);
+  g.addColorStop(0,`rgba(${rgb(col)},.52)`);g.addColorStop(1,'rgba(212,160,23,.18)');
+  ctx.fillStyle=g;ctx.fill();
+  ctx.strokeStyle=G;ctx.lineWidth=2;ctx.shadowColor=G;ctx.shadowBlur=8;ctx.stroke();ctx.shadowBlur=0;
+  for(let i=0;i<n;i++){
+    const a=(Math.PI*2/n)*i-Math.PI/2,v=Math.min(stats[K[i]].r,10)/10,r=R*v;
+    const dx=cx+r*Math.cos(a),dy=cy+r*Math.sin(a);
+    ctx.beginPath();ctx.arc(dx,dy,4.5,0,Math.PI*2);ctx.fillStyle=G;ctx.shadowColor=G;ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0;
+    ctx.beginPath();ctx.arc(dx,dy,2,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+  }
+  for(let i=0;i<n;i++){
+    const a=(Math.PI*2/n)*i-Math.PI/2;
+    ctx.fillStyle='#d4a017';ctx.font='bold 9px Rajdhani,sans-serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(K[i].toUpperCase(),cx+(R+20)*Math.cos(a),cy+(R+20)*Math.sin(a));
+  }
+}
+
+(function build(){
+  const grid=document.getElementById('grid');
+  PLAYERS.forEach(p=>{
+    const SK=Object.keys(p.stats);
+    const bars=SK.map(k=>{
+      const s=p.stats[k],pct=Math.round((Math.min(s.r,10)/10)*100);
+      return`<div class="bar-row"><div class="bl">${k}</div><div class="bt"><div class="bf" style="width:${pct}%;background:${BC[k]}"></div></div><div class="bv">${s.l}</div></div>`;
+    }).join('');
+    const traits=p.traits.map((t,i)=>`<span class="trait${p.isGem&&i<3?' g':''}">${t}</span>`).join('');
+    const gemTag=p.isGem?`<div class="gem-tag">${p.gemLabel}</div>`:'';
+    const card=document.createElement('div');
+    card.className='card'+(p.isGem?' is-gem':'');
+    card.innerHTML=`
+      ${gemTag}
+      <div class="c-hdr">
+        <div class="num">${String(p.id).padStart(2,'0')}</div>
+        <div class="info">
+          <div class="pname">${p.first} <span>${p.last}</span></div>
+          <div class="meta">
+            <span class="badge b-pos">${p.posShort}</span>
+            <span class="badge b-club">${p.club}</span>
+            <span class="badge b-league">${p.league}</span>
+          </div>
+        </div>
+        <div class="rating"><div class="rv">${p.rating}</div><div class="rl">RTG</div></div>
+      </div>
+      <div class="radar-wrap">
+        <canvas class="radar" id="r${p.id}" width="240" height="240"></canvas>
+        <div class="radar-season">${p.season}</div>
+      </div>
+      <div class="data-note${p.dnClass?' '+p.dnClass:''}">📊 ${p.dnote}</div>
+      <div class="bars">${bars}</div>
+      <div class="traits">${traits}</div>
+      <div class="contract">📋 <span class="badge ${p.cType}">${p.cNote}</span></div>
+      <div class="links">
+        <a href="${p.sofaUrl}" target="_blank" class="lbtn l-sf">⚡ Sofascore</a>
+        <a href="${p.tmUrl}" target="_blank" class="lbtn l-tm">🔗 Transfermarkt</a>
+      </div>`;
+    grid.appendChild(card);
+    requestAnimationFrame(()=>radar(document.getElementById('r'+p.id),p.stats,p.color));
+  });
+})();
+</script>
+</body>
+</html>
